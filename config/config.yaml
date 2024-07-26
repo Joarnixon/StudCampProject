@@ -1,0 +1,37 @@
+data_folder_name: data
+
+paths:
+  mutation_dir:
+    images: ${data_folder_name}/nifti/series_nii_mutation_anonym
+    masks: ${data_folder_name}/nifti/masks_nii_mutation_anonym
+  no_mutation_dir:
+    images: ${data_folder_name}/nifti/series_nii_no_mutation_anonym
+    masks: ${data_folder_name}/nifti/masks_nii_no_mutation_anonym
+
+extractor_params:
+  verbose: False
+  normalizeScale: 1
+  normalize: False
+  removeOutliers: False
+
+exclude_features:
+  - diagnostics_Versions_PyRadiomics
+  - diagnostics_Versions_Numpy
+  - diagnostics_Versions_SimpleITK
+  - diagnostics_Versions_PyWavelet
+  - diagnostics_Versions_Python
+  - diagnostics_Image-original_Minimum
+  - diagnostics_Image-original_Maximum
+  - diagnostics_Configuration_Settings
+  - diagnostics_Configuration_EnabledImageTypes
+  - diagnostics_Image-original_Hash
+  - diagnostics_Image-original_Dimensionality
+  - diagnostics_Image-original_Spacing
+  - diagnostics_Image-original_Size
+  - diagnostics_Mask-original_Hash
+  - diagnostics_Mask-original_Spacing
+  - diagnostics_Mask-original_VolumeNum
+  - diagnostics_Mask-original_Size
+  - diagnostics_Mask-original_BoundingBox
+  - diagnostics_Mask-original_CenterOfMassIndex
+  - diagnostics_Mask-original_CenterOfMass
