@@ -86,7 +86,7 @@ class RadiomicsPreprocessor:
 
 
 # Usage
-p = RadiomicsPreprocessor('config/config.yaml')
+p = RadiomicsPreprocessor('config.yaml')
 mutation_df = p.extract_batch(mutation=True, save=True)
 no_mutation_df = p.extract_batch(mutation=False, save=True)
 
