@@ -7,13 +7,14 @@ from torchvision.transforms import ToTensor
 import numpy as np
 
 class TumorDataset(Dataset):
-    def __init__(self, config_path, transform, mutation=True):
+    def __init__(self, config_path, transform=ToTensor(), mutation=True):
         cfg = OmegaConf.load(config_path)
         OmegaConf.resolve(cfg)
         self.image_dir = cfg.paths.mutation_dir.images if mutation else cfg.paths.no_mutation_dir.images
         self.mask_dir = cfg.paths.mutation_dir.masks if mutation else cfg.paths.no_mutation_dir.masks
-        self.image_files = sorted([f for f in os.listdir(self.image_dir) if f.endswith('.nii')])
-        self.mask_files = sorted([f for f in os.listdir(self.mask_dir) if f.endswith('.nii')])
+        self.image_files = [f for f in os.listdir(self.image_dir) if f.endswith('.nii')]
+        self.mask_files = [image_file.split('.')[0] + '_label.nii' for image_file in self.image_files]
+        print(self.image_files, self.mask_files)
         self.transform = transform
     
     def __len__(self):
@@ -45,7 +46,7 @@ def make_loader(config_path, transform=ToTensor(), batch_size=4, mutation=True, 
 
 # Usage:
 # No batching:
-# a = TumorDataset(config_path='config/config.yaml')
+# a = TumorDataset(config_path='config.yaml')
 # for b, c in a:
 #     plt.imshow(b[12])
 #     plt.show()
