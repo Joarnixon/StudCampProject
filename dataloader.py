@@ -14,7 +14,6 @@ class TumorDataset(Dataset):
         self.mask_dir = cfg.paths.mutation_dir.masks if mutation else cfg.paths.no_mutation_dir.masks
         self.image_files = [f for f in os.listdir(self.image_dir) if f.endswith('.nii')]
         self.mask_files = [image_file.split('.')[0] + '_label.nii' for image_file in self.image_files]
-        print(self.image_files, self.mask_files)
         self.transform = transform
     
     def __len__(self):
