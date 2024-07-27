@@ -1,5 +1,5 @@
 import nibabel as nib
-from torch.utils.data import Dataset
+from torch.utils.data import Dataset, DataLoader
 import os
 import torch
 from omegaconf import OmegaConf
@@ -7,7 +7,7 @@ from torchvision.transforms import ToTensor
 import numpy as np
 
 class TumorDataset(Dataset):
-    def __init__(self, config_path, mutation=True, transform=ToTensor()):
+    def __init__(self, config_path, transform, mutation=True):
         cfg = OmegaConf.load(config_path)
         OmegaConf.resolve(cfg)
         self.image_dir = cfg.paths.mutation_dir.images if mutation else cfg.paths.no_mutation_dir.images
@@ -31,10 +31,22 @@ class TumorDataset(Dataset):
         mask = self.transform(mask)
         
         return image, mask
-    
-# Usage:
 
+def make_loader(config_path, transform=ToTensor(), batch_size=4, mutation=True, shuffle=True, num_workers=4):
+    dataset = TumorDataset(config_path, mutation=mutation, transform=transform)
+    
+    dataloader = DataLoader(
+        dataset,
+        batch_size=batch_size,
+        shuffle=shuffle,
+        num_workers=num_workers,
+    )
+    return dataloader
+
+# Usage:
+# No batching:
 # a = TumorDataset(config_path='config/config.yaml')
 # for b, c in a:
 #     plt.imshow(b[12])
 #     plt.show()
+# For batching use make_loader but will throw errors maybe because data has different shapes and needs interpolation.
