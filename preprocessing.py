@@ -82,10 +82,12 @@ class RadiomicsPreprocessor:
         df = pd.DataFrame(self._df_processed, index=index)
         if save:
             df.to_csv('mutation.csv' if mutation else 'no_mutation.csv', index=True, index_label='filename')
-            # pd.read_csv('mutation.csv', index_col='filename') access to csv
         return pd.DataFrame(self._df_processed, index=index)
+
 
 # Usage
 p = RadiomicsPreprocessor('config/config.yaml')
-# mutation_df = p.extract_batch(mutation=True, save=True)
+mutation_df = p.extract_batch(mutation=True, save=True)
 no_mutation_df = p.extract_batch(mutation=False, save=True)
+
+# pd.read_csv('mutation.csv', index_col='filename') <- access to csv
