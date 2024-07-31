@@ -1,8 +1,8 @@
 # Нужно поменять config.yaml для работы preprocessing
 
-# StudCampAE-256 - ноутбук для тренировки автоэнкодера.
+# StudCampAE-256/128 - ноутбук для тренировки автоэнкодера.
 
-# Evaluation - scores, feature selection
+# Evaluation - scores, feature selection, pca analysis
 
 # Classic models - scores, features selection, models
 
