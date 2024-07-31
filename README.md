@@ -8,4 +8,5 @@
 
 # Dataloader - загрузка данных в torch тензоры
 
+# Generate data 3d volumes - генерация аугментированных данных
 
